@@ -1,0 +1,3 @@
+# SpringBoot配置加载机制及扩展
+
+SpringBoot既能兼顾Spring的强大功能，又能简化繁琐的xml配置，只需在application.properties中完成一些属性配置即可开启各模块功能，实现快速、敏捷开发Web应用程序。本文主要解析了SpringBoot加载配置文件的逻辑，并实现了自定义对Json语法的配置支持。最后对配置文件的使用做了示例说明。
