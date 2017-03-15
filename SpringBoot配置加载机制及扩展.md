@@ -38,7 +38,7 @@ public interface PropertySourceLoader { 
 - ConfigFileApplicationListener定义了默认的文件名DEFAULT_NAMES=”application”，所以SpringBoot会根据文件名加扩展名来加载文件。
 - Load()方法会读取配置文件并返回PropertySource，交由SpringBoot读取配置项，合并到总的配置对象中。
 
-##自定义PropertySourceLoader
+## 自定义PropertySourceLoader
 以上是SpringBoot加载配置文件的流程，很多时候应用程序需要自定义配置文件，所以需要自己实现接口类，并将该实现类配置到spring.factories中。比如SpringBoot并未实现加载json的配置文件，我们可以定义JsonPropertySourceLoader来实现对json配置文件的支持。
 ``` java
 public class JsonPropertySourceLoader implements PropertySourceLoader { 
