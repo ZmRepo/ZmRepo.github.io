@@ -137,3 +137,4 @@ public class SecurityProperties { 
     private String port; 
 }
 ```
+本文只列举了常见的三类配置，如果需要查看更全面的配置示例，请查看官网帮助文档［Spring Boot Doc](http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/html/boot-features-external-config.html)
