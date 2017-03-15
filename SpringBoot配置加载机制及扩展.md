@@ -48,7 +48,7 @@ public class JsonPropertySourceLoader implements PropertySourceLoader { 
     public PropertySource load(String name, Resource resource, String profile) {         
         return new MapPropertySource(name, new HashMap<String, Object>())     
     }
- }
+}
 ```
 
 接下来在ClassPath路径下新建/META-INF/spring.factories文件，并配置JsonPropertySourceLoader即完成了自定义的配置文件加载。
