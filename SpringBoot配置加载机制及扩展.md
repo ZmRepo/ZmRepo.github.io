@@ -22,8 +22,8 @@ org.springframework.boot.context.config.AnsiOutputApplicationListener,\ 
 org.springframework.boot.context.config.ConfigFileApplicationListener,\ 
 org.springframework.boot.context.config.DelegatingApplicationListener,\ 
 org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener,\ 
-org.springframework.boot.logging.ClasspathLoggingApplicationListener,\
- org.springframework.boot.logging.LoggingApplicationListener
+org.springframework.boot.logging.ClasspathLoggingApplicationListener,\ 
+org.springframework.boot.logging.LoggingApplicationListener
 ```
 
 由上配置可知，框架默认实现对properties及yaml语法的支持，PropertySourceLoader就是加载配置文件的接口类：
@@ -34,9 +34,9 @@ public interface PropertySourceLoader { 
 }
 ```
 
-getFileExtensions()是返回支持的文件扩展名，比如PropertiesPropertySourceLoader支持的扩展名是xml及properties；
-ConfigFileApplicationListener定义了默认的文件名DEFAULT_NAMES=”application”，所以SpringBoot会根据文件名加扩展名来加载文件。
-Load()方法会读取配置文件并返回PropertySource，交由SpringBoot读取配置项，合并到总的配置对象中。
+- getFileExtensions()是返回支持的文件扩展名，比如PropertiesPropertySourceLoader支持的扩展名是xml及properties；
+- ConfigFileApplicationListener定义了默认的文件名DEFAULT_NAMES=”application”，所以SpringBoot会根据文件名加扩展名来加载文件。
+- Load()方法会读取配置文件并返回PropertySource，交由SpringBoot读取配置项，合并到总的配置对象中。
 
 ##自定义PropertySourceLoader
 以上是SpringBoot加载配置文件的流程，很多时候应用程序需要自定义配置文件，所以需要自己实现接口类，并将该实现类配置到spring.factories中。比如SpringBoot并未实现加载json的配置文件，我们可以定义JsonPropertySourceLoader来实现对json配置文件的支持。
@@ -47,7 +47,7 @@ public class JsonPropertySourceLoader implements PropertySourceLoader { 
     }     
     public PropertySource load(String name, Resource resource, String profile) {         
         return new MapPropertySource(name, new HashMap<String, Object>())     
-    }
+    } 
 }
 ```
 
@@ -111,13 +111,13 @@ Spring Boot默认使用Logback进行日志记录，并会加载默认的Logback�
   <root level="INFO">       
     <appender-ref ref="CONSOLE" />       
     <appender-ref ref="FILE" />    
-  </root>
+  </root> 
 </included>
 ```
 通过application.properties对Logback进行配置，可以指定日志文件的位置及名称，并可对不同的包或jar制定日志级别，配置如下：
 ``` java
 logging.file=log.log
-logging.path=d:\\log
+logging.path=d:\\log 
 logging.level.com.cmbc.firefly.server.*=debug
 ```
 
@@ -129,7 +129,7 @@ security.cfca.port=8004
 ```
 然后通过@Value(“${“属性名”}”)注解来加载对应的配置属性，具体如下：
 ``` java
-@Component
+@Component 
 public class SecurityProperties {     
     @Value("${security.firefly}")     
     private String url;          
