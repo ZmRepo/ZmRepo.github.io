@@ -100,26 +100,25 @@ Public void registerBeanDefinition(String beanName, BeanDefinition beanDefinitio
             ((AbstractBeanDefinition) beanDefinition).validate();
         } catch (BeanDefinitionValidationException ex) {
             throw new BeanDefinitionStoreException(“”, beanName, "", ex);
-	    }
+	}
     }
     synchronized (this.beanDefinitionMap) {
-		Object oldBeanDefinition = this.beanDefinitionMap.get(beanName);
-		if (oldBeanDefinition != null) {
-			if (!this.allowBeanDefinitionOverriding) {
-				throw new BeanDefinitionStoreException(“”, beanName, "");
-			} else {
-				if (this.logger.isInfoEnabled()) {
-					this.logger.info("Overriding bean definition for bean '" + beanName);
-				}
-			}
+	Object oldBeanDefinition = this.beanDefinitionMap.get(beanName);
+	if (oldBeanDefinition != null) {
+	    if (!this.allowBeanDefinitionOverriding) {
+		throw new BeanDefinitionStoreException(“”, beanName, "");
+	    } else {
+	        if (this.logger.isInfoEnabled()) {
+		    this.logger.info("Overriding bean definition for bean '" + beanName);
 		}
-		else {
-			this.beanDefinitionNames.add(beanName);
-			this.frozenBeanDefinitionNames = null;
-		}
-		this.beanDefinitionMap.put(beanName, beanDefinition);
-		resetBeanDefinition(beanName);
+  	    }
+	} else {
+	    this.beanDefinitionNames.add(beanName);
+	        this.frozenBeanDefinitionNames = null;
 	}
+	this.beanDefinitionMap.put(beanName, beanDefinition);
+	resetBeanDefinition(beanName);
+    }
 }
 ```
 该接口完成BeanDefinition向容器的注册，就是将解析的Bean定义存入BeanDefinitionNames和BeanDefinitionMap中去，处理的时候需要依据allowBeanDefinitionOverriding的配置来完成。在完成了BeanDefinition的注册，就完成了IoC容器的初始化过程。此时，在使用IoC容器DefaultListableBeanFactory中已经建立了整个Bean的配置信息，而且这些BeanDefinition已经可以被容器使用了，可以通过beanDefinitionMap里被检索和使用。容器的作用就是对这些信息进行处理和维护，是实现依赖反转的基础。
