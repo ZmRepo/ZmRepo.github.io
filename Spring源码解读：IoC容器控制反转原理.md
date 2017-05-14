@@ -8,6 +8,7 @@
 ## Web应用启动
 
 我们知道创建Spring容器有多种形式：
+
 1、手动实例化ApplicationContext，比如：
 ``` java
 ApplicationContext ctx = new ClassPathXmlApplicationContext("conf/appContext.xml");
@@ -79,9 +80,11 @@ protected Class<?> determineContextClass(ServletContext servletContext) {
 2、实例化ApplicationContext容器。
 
 ##Spring IoC容器初始化
+
 Spring IoC容器初始化过程分为三步：资源定为、配置解析以及IoC容器注册，具体流程细节已在上一章节做解读，本文不再赘述
 
 ##Spring IoC容器依赖注入原理
+
 众所周知，IoC容器的依赖反转核心是一个对象依赖的其他对象会通过被动的方式传递进来，而不是对象本身创建或者查找依赖对象。在容器初始化后已完成用户定义的Bean解析注册，并建立了bean之间的映射关系存储在beanDefinitionMap里被检索和使用，但并未对管理的Bean进行实例化，只有在以下两种情况下会触发依赖注入：
 1、用户第一次向容器索要Bean时会触发
 2、用户定义Bean资源中为元素配置了lazy-init属性，让容器在解析注册Bean时进行预实例化，触发依赖注入。
